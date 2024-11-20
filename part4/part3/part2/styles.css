@@ -1,22 +1,41 @@
-/* Corps global */
+/* Global Body */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* En-tête */
+/* Header */
 header {
-    background-color: #f4f4f4;
+    background-color: #FF6666;
     padding: 10px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
     height: 50px;
 }
 
-/* Pied de page */
+nav a {
+    color: #333;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+nav .login-button {
+    background-color: #FF0000;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+nav .login-button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
 footer {
     background-color: #333;
     color: white;
@@ -24,43 +43,52 @@ footer {
     padding: 10px;
 }
 
-/* Formulaires */
-form {
-    margin: auto;
-    width: 300px;
+/* Filter Section */
+#filter {
+    background-color: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+}
+
+#filter h2 {
+    margin-top: 0;
+}
+
+#price-filter {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Places List */
+#places-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.place-card {
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-form input, form textarea, form select {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.place-card h2 {
+    margin-top: 0;
 }
 
-/* Cartes */
-.place-card, .review-card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin: 20px;
-    padding: 10px;
-    background-color: #f4f4f4;
-}
-
-/* Boutons */
-button, .details-button {
-    background-color: #007BFF;
+.details-button {
+    background-color: #FF6666;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover, .details-button:hover {
+.details-button:hover {
     background-color: #0056b3;
 }
