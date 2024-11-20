@@ -7,23 +7,45 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <img src="images/logo.png" alt="Logo de l'application" class="logo">
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="login.html" class="login-button">Connexion</a>
+        </nav>
+    </header>
     <main>
         <section id="place-details">
-            <!-- Place details will be populated dynamically -->
+            <h1>Nom du Lieu</h1>
+            <p>Prix par nuit : 120€</p>
+            <p>Description : Ce lieu est parfait pour des vacances en famille.</p>
+            <h3>Amenities</h3>
+            <ul>
+                <li>WiFi</li>
+                <li>Parking gratuit</li>
+                <li>Petit-déjeuner inclus</li>
+            </ul>
         </section>
         <section id="reviews">
-            <!-- Reviews will be populated dynamically -->
+            <h3>Commentaires</h3>
+            <article class="review-card">
+                <p>Utilisateur : Alice</p>
+                <p>Commentaire : Superbe expérience !</p>
+                <p>Note : ★★★★★</p>
+            </article>
         </section>
         <section id="add-review">
-            <h2>Add a Review</h2>
+            <h2>Ajouter un Avis</h2>
             <form id="review-form">
-                <label for="review-text">Review:</label>
+                <label for="review-text">Avis :</label>
                 <textarea id="review-text" name="review-text" required></textarea>
-                
-                <button type="submit">Submit</button>
+                <button type="submit">Soumettre</button>
             </form>
         </section>
     </main>
+    <footer>
+        <p>Tous droits réservés © 2024</p>
+    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>

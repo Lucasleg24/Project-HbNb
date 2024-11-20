@@ -8,21 +8,38 @@
 </head>
 <body>
     <header>
+        <img src="images/logo.png" alt="Logo de l'application" class="logo">
         <nav>
-            <a href="login.html" id="login-link">Login</a>
+            <a href="index.html">Accueil</a>
+            <a href="login.html" class="login-button">Connexion</a>
         </nav>
     </header>
     <main>
         <section id="filter">
-            <label for="price-filter">Max Price:</label>
+            <h2>Filtrer les lieux</h2>
+            <label for="price-filter">Prix maximum :</label>
             <select id="price-filter">
-                <!-- Options will be populated dynamically -->
+                <option value="100">100€</option>
+                <option value="200">200€</option>
+                <option value="300">300€</option>
             </select>
         </section>
         <section id="places-list">
-            <!-- List of places will be populated dynamically -->
+            <article class="place-card">
+                <h2>Nom du Lieu</h2>
+                <p>Prix par nuit : 100€</p>
+                <button class="details-button" onclick="window.location.href='place.html'">Voir les détails</button>
+            </article>
+            <article class="place-card">
+                <h2>Un autre Lieu</h2>
+                <p>Prix par nuit : 150€</p>
+                <button class="details-button" onclick="window.location.href='place.html'">Voir les détails</button>
+            </article>
         </section>
     </main>
+    <footer>
+        <p>Tous droits réservés © 2024</p>
+    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>
