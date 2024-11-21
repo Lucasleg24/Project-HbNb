@@ -92,3 +92,119 @@ footer {
 .details-button:hover {
     background-color: #0056b3;
 }
+
+/* Place Details Section */
+.place-details {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.place-info {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Reviews Section */
+#reviews {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-card {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.review-card:last-child {
+    border-bottom: none;
+}
+
+.review-user {
+    font-weight: bold;
+    color: #333;
+}
+
+.review-comment {
+    margin: 5px 0;
+}
+
+.review-rating {
+    color: #FF6666;
+    font-weight: bold;
+}
+
+/* Add Review Section */
+#add-review {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.add-review {
+    margin-top: 10px;
+}
+
+.add-review-button {
+    background-color: #FF6666;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.add-review-button:hover {
+    background-color: #0056b3;
+}
+
+#review-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#review-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+}
+
+#review-form button {
+    background-color: #FF6666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#review-form button:hover {
+    background-color: #0056b3;
+}
+
+/* No Reviews Message */
+#no-reviews-message {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+    margin-top: 20px;
+}
