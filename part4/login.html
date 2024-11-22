@@ -3,32 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Hbnb</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <img src="images/logo.png" alt="Logo de l'application" class="logo">
+        <img src="images/logo.png" alt="Hbnb Logo" class="logo">
         <nav>
             <a href="index.html">Home</a>
-            <a href="login.html" class="login-button">Connexion</a>
+            <a href="login.html" class="login-button">Login</a>
         </nav>
     </header>
+
+    <!-- Main Content -->
     <main>
-        <form id="login-form">
-            <h2>Connexion</h2>
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="password">Password :</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit">Connexion</button>
-        </form>
+        <section class="login">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+        </section>
     </main>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Hbnb. All rights reserved.</p>
     </footer>
-    <script src="scripts.js"></script>
+
+    <script src="./scripts.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ body {
     padding: 0;
 }
 
-/* Header */
+/* Header (inchangé) */
 header {
     background-color: #FF6666;
     padding: 10px;
@@ -210,4 +210,64 @@ footer {
     font-size: 16px;
     color: #777;
     margin-top: 20px;
+}
+
+/* Section de login centrée */
+.login {
+    width: 300px;                       /* Largeur fixe pour la section de login */
+    margin: 0 auto;                      /* Centrer horizontalement */
+    padding: 20px;                       /* Ajouter du padding autour du formulaire */
+    background-color: #fff;              /* Fond blanc */
+    border-radius: 8px;                  /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce pour le formulaire */
+}
+
+.login h2 {
+    text-align: center;                  /* Centrer le titre */
+    font-size: 24px;
+    color: #333;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;              /* Aligner les éléments du formulaire verticalement */
+}
+
+.login label {
+    margin-bottom: 5px;                  /* Espacement sous les labels */
+    font-size: 14px;
+    color: #333;
+}
+
+.login input {
+    margin-bottom: 15px;                 /* Espacement sous les champs de saisie */
+    padding: 10px;                       /* Padding à l'intérieur des champs */
+    font-size: 14px;                     /* Taille du texte */
+    border: 1px solid #ccc;              /* Bordure légère */
+    border-radius: 4px;                  /* Coins arrondis */
+}
+
+.login button {
+    padding: 10px;                       /* Padding à l'intérieur du bouton */
+    background-color: #FF6666;           /* Couleur de fond du bouton */
+    color: white;                        /* Couleur du texte du bouton */
+    border: none;                        /* Enlever la bordure */
+    border-radius: 4px;                  /* Coins arrondis */
+    cursor: pointer;                    /* Curseur pointer */
+}
+
+.login button:hover {
+    background-color: #0056b3;           /* Couleur au survol */
+}
+
+/* Responsive design pour les petits écrans */
+@media (max-width: 768px) {
+    #places-list {
+        grid-template-columns: 1fr;       /* Sur petits écrans, les cartes des places prennent 100% de la largeur */
+    }
+
+    .login {
+        width: 100%;                       /* La section de login prend 100% de la largeur sur petits écrans */
+        padding: 15px;
+    }
 }
