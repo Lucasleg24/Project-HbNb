@@ -1,9 +1,9 @@
 // URL LOGIN
 const API_URL = 'http://127.0.0.1:5000/api/v1/auth/login';
-const LOGIN_PAGE_URL = 'http://127.0.0.1:5500/part4/front_end/login.html';
-const INDEX_PAGE_URL = 'http://127.0.0.1:5500/part4/front_end/index.html';
-const PLACE_PAGE_URL = 'http://127.0.0.1:5500/part4/front_end/place.html';
-const REVIEW_PAGE_URL = 'http://127.0.0.1:5500/part4/front_end/add_review.html';
+const LOGIN_PAGE_URL = 'http://127.0.0.1:5500/part4/login.html';
+const INDEX_PAGE_URL = 'http://127.0.0.1:5500/part4/index.html';
+const PLACE_PAGE_URL = 'http://127.0.0.1:5500/part4/place.html';
+const REVIEW_PAGE_URL = 'http://127.0.0.1:5500/part4/add_review.html';
 
 // Fonction pour gérer les cookies
 function setAuthCookie(token) {
@@ -46,6 +46,7 @@ function loginRequest() {
                     setAuthCookie(data.access_token);
                     // Redirige vers la page principale
                     window.location.href = 'index.html';
+
                 } else {
                     const errorElement = document.getElementById('error-message');
                     if (errorElement) {

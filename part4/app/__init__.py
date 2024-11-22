@@ -9,6 +9,7 @@ from app.api.v1.places import api as places_ns
 from app.api.v1.auth import api as auth_ns
 from app.api.v1.admin import api as admin_ns
 from app.extensions import db, bcrypt
+from flask_cors import CORS
 
 jwt = JWTManager()
 
@@ -24,6 +25,17 @@ def create_app(config_class="config.DevelopmentConfig"):
 
     # Load the configuration from the provided class
     app.config.from_object(config_class)
+
+    CORS(app, resources={
+        r"/api/*": {
+            "origins": ["http://localhost:5000", "http://127.0.0.1:5000",
+                       "http://localhost", "http://127.0.0.1",
+                       "http://localhost:5500", "http://127.0.0.1:5500"],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization", "Accept"],
+            "supports_credentials": True
+        }
+    })
 
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
 
