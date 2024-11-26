@@ -66,9 +66,11 @@ footer {
 /* Places List */
 #places-list {
     display: grid; /* Conversion en grille pour gérer les colonnes */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Colonnes flexibles */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Colonnes flexibles */
     grid-gap: 20px; /* Espacement entre les blocs */
     padding: 20px;
+    justify-items: center;
+    margin: 0 auto;
     justify-content: center; /* Centrer les colonnes si elles ne remplissent pas la ligne */
 }
 
@@ -108,7 +110,7 @@ footer {
 /* Bouton Voir Détails */
 .place-card a {
     display: inline-block;
-    background-color: #FF6666; /* Couleur orange conforme au design */
+    background-color: #FF6666; /* Couleur conforme au design */
     color: white;
     padding: 10px 20px;
     text-decoration: none;
