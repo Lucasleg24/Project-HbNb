@@ -18,6 +18,32 @@ function setAuthCookie(token) {
     document.cookie = `token=${token}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Strict`;
 }
 
+function checkAuthentication() {
+    const token = getCookie('token');
+    const loginLink = document.getElementsByClassName('login-button');
+    console.log(loginLink[0]);
+
+    if (!token) {
+        console.log("Pas de token");
+        loginLink[0].style.display = 'block';
+    } else {
+        console.log(token);
+        loginLink[0].style.display = 'none';
+    }
+    fetchPlaces();
+}
+function getCookie(name) {
+    // Function to get a cookie value by its name
+    const cookies = document.cookie.split(";");
+    console.log(cookies);
+    for (cookie of cookies) {
+        if (cookie.startsWith(name + "=")) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+}
+
 async function loginRequest(event) {
     event.preventDefault()
     const email = document.getElementById('email').value;
@@ -123,12 +149,26 @@ function priceFilter() {
     });
   }
 
-function init() {
-    console.log("Initializing..." + document.body.id);
-    if (document.body.id === "index-page") {
-        console.log("Loading index page...");
-        indexLoad();
-    }
-}
+//function init() {
+    //console.log("Initializing..." + document.body.id);
+    //if (document.body.id === "index-page") {
+        //console.log("Loading index page...");
+        //indexLoad();
+    //}
+//}
 
-document.addEventListener('DOMContentLoaded', init);
+//document.addEventListener('DOMContentLoaded', init);
+
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuthentication();
+
+    // Récupère le nom du fichier depuis l'URL
+    const currentPage = window.location.pathname.split('/').pop();
+    if (document.body.id === "login-page") {
+      loginLoad();
+    }
+
+    if (document.body.id === "index-page") {
+      indexLoad();
+    }
+});

@@ -18,6 +18,13 @@ header {
     height: 50px;
 }
 
+/* Navigation */
+nav {
+    display: flex;
+    gap: 10px; /* Espacement horizontal entre les éléments */
+    align-items: center; /* Aligner les éléments verticalement */
+}
+
 nav a {
     color: #333;
     text-decoration: none;
@@ -40,7 +47,6 @@ footer {
     background-color: #333;
     color: white;
     text-align: center;
-    position: fixed;
     bottom: 0;
     width: 100%;
     padding: 10px;
