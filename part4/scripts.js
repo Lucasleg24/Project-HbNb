@@ -1,52 +1,47 @@
 // URL LOGIN
 const API_URL = 'http://127.0.0.1:5000/api/v1/auth/login';
+
 const LOGIN_PAGE_URL = 'http://127.0.0.1:5500/part4/login.html';
 const INDEX_PAGE_URL = 'http://127.0.0.1:5500/part4/index.html';
 const PLACE_PAGE_URL = 'http://127.0.0.1:5500/part4/place.html';
 const REVIEW_PAGE_URL = 'http://127.0.0.1:5500/part4/add_review.html';
 
+const GET_ALL_PLACES = 'http://127.0.0.1:5000/api/v1/places';
+const GET_PLACE = 'http://127.0.0.1:5000/api/v1/places/{place_id}'
+const POST_REVIEW = 'http://127.0.0.1:5000/api/v1/reviews';
+const GET_REVIEWS_FROM_PLACE = 'http://127.0.0.1:5000/api/v1/reviews/places/{place_id}';
+
 // Fonction pour gérer les cookies
 function setAuthCookie(token) {
     const expiryDate = new Date();
     expiryDate.setDate(expiryDate.getDate() + 7);
-    // crée un cooke avec le token et la date d'expiration disponible sur tout le site mais uniquement pour le site
     document.cookie = `token=${token}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Strict`;
 }
 
-function loginRequest() {
-    // Récupère le formulaire de login par son ID CSS
-    const loginForm = document.getElementById('login-form');
+async function loginRequest(event) {
+    event.preventDefault()
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    // si l'id existe dans la page
-    if (loginForm) {
-        loginForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
+    console.log(email);
+    if (email && password) {
             try {
-                // Récupère les données du formulaire
                 const formData = new FormData(event.target);
-                // Envoie la requête au serveur
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    // Convertit les données du formulaire en JSON
                     body: JSON.stringify({
-                        email: formData.get('email'),
-                        password: formData.get('password')
+                        email, password
                     })
                 });
-                // Récupère la réponse du serveur en JSON
                 const data = await response.json();
+                console.log(data);
 
-                // Vérifie si la connexion est réussie
                 if (response.ok && data.access_token) {
-                    // Sauvegarde le token dans un cookie en appelant la fonction setAuthCookie
                     setAuthCookie(data.access_token);
-                    // Redirige vers la page principale
                     window.location.href = 'index.html';
-
                 } else {
                     const errorElement = document.getElementById('error-message');
                     if (errorElement) {
@@ -60,26 +55,80 @@ function loginRequest() {
                 console.error('Erreur de login:', error);
                 alert('Erreur lors de la connexion');
             }
-        });
     }
 }
 
-// Vérification de l'URL avant d'appeler loginRequest
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.href === LOGIN_PAGE_URL) {
-      console.log("LOGIN")
-      loginRequest();
+function indexLoad() {
+    console.log("test0");
+    fetchPlaces();
+}
+
+async function fetchPlaces() {
+    try {
+        console.log("test1");
+        const response = await fetch(GET_ALL_PLACES);
+        console.log(response);
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`);
+        }
+        console.log("test2");
+
+        const places = await response.json();
+        console.log(places);
+        displayPlaces(places);
+        return places;
+    } catch (error) {
+        console.error('Erreur de chargement des places :', error);
+    }
+}
+
+function displayPlaces(places) {
+    const placesList = document.getElementById('places-list');
+    console.log(placesList);
+    placesList.innerHTML = '';
+    places.forEach(place => {
+        const placeElement = document.createElement('div');
+        placeElement.classList.add('card', 'place-card');
+        placeElement.dataset.price = place.price;
+        placeElement.dataset.placeId = place.id;
+        placeElement.innerHTML = `
+        <h3 class="place-name">${place.title}</h3>
+        <p class="place-price">Price per night: $${place.price}</p>
+        <a href="place.html" class="button login-button">View Details</a>`;
+        placesList.appendChild(placeElement);
+        console.log(placeElement);
+    });
+    priceFilter();
+}
+
+function priceFilter() {
+    const priceSelect = document.getElementById('price-filter'); // récup filtre
+    const placeCards = document.querySelectorAll('.place-card'); // récup les cartes de lieux
+
+    // regarde si le filtre change si oui convertie la valeur en int
+    priceSelect.addEventListener('change', (event) => {
+      const selectedPrice = parseInt(event.target.value); // Convertir en nombre
+
+      placeCards.forEach(card => { // Parcourt toutes les cartes
+        const placePrice = parseInt(card.dataset.price); // Récup prix stocké dans la carte du lieu
+
+        // si le prix de la place est inférieur ou égal au prix selectionné (0 si 'All' est select)
+        if (selectedPrice === 0 || placePrice <= selectedPrice) {
+          card.style.display = 'block'; // affiche la carte
+        } else { // sinon
+          card.style.display = 'none'; // cache la carte
+        }
+      });
+    });
   }
 
-    if (window.location.href === INDEX_PAGE_URL) {
-      console.log("INDEX")
-  }
+function init() {
+    console.log("Initializing..." + document.body.id);
+    if (document.body.id === "index-page") {
+        console.log("Loading index page...");
+        indexLoad();
+    }
+}
 
-    if (window.location.href === PLACE_PAGE_URL) {
-      console.log("PLACE")
-  }
-
-    if (window.location.href === REVIEW_PAGE_URL) {
-      console.log("REVIEW")
-  }
-});
+document.addEventListener('DOMContentLoaded', init);

@@ -6,7 +6,7 @@
     <title>Login - Hbnb</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body id="login-page">
     <!-- Header -->
     <header>
         <img src="images/logo.png" alt="Hbnb Logo" class="logo">
@@ -20,7 +20,7 @@
     <main>
         <section class="login">
             <h2>Login</h2>
-            <form id="login-form" class="form">
+            <form id="login-form" class="form" onsubmit="loginRequest(event)">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
                 

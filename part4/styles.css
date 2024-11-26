@@ -65,35 +65,60 @@ footer {
 
 /* Places List */
 #places-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
+    display: grid; /* Conversion en grille pour gérer les colonnes */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Colonnes flexibles */
+    grid-gap: 20px; /* Espacement entre les blocs */
     padding: 20px;
+    justify-content: center; /* Centrer les colonnes si elles ne remplissent pas la ligne */
 }
 
+/* Place Cards */
 .place-card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* Fond blanc */
+    border: 1px solid #ddd; /* Bordure légère */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    width: 100%; /* Prend la largeur définie par la grille */
+    max-width: 300px; /* Largeur maximale pour limiter la taille des blocs */
+    padding: 20px; /* Espacement interne */
+    text-align: center; /* Centrer le contenu */
+    transition: transform 0.3s, box-shadow 0.3s; /* Effet au survol */
 }
 
-.place-card h2 {
-    margin-top: 0;
+.place-card:hover {
+    transform: translateY(-5px); /* Légère translation vers le haut */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
 }
 
-.details-button {
-    background-color: #FF6666;
+/* Titre du lieu */
+.place-card h3 {
+    margin: 10px 0;
+    font-size: 18px; /* Taille légèrement réduite pour équilibrer le design */
+    font-weight: bold;
+    color: #333;
+}
+
+/* Prix */
+.place-card .place-price {
+    margin: 10px 0 20px; /* Espacement entre le prix et le bouton */
+    font-size: 16px;
+    color: #555;
+}
+
+/* Bouton Voir Détails */
+.place-card a {
+    display: inline-block;
+    background-color: #FF6666; /* Couleur orange conforme au design */
     color: white;
-    border: none;
     padding: 10px 20px;
+    text-decoration: none;
     border-radius: 5px;
-    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Animation de la couleur */
 }
 
-.details-button:hover {
-    background-color: #0056b3;
+.place-card a:hover {
+    background-color: #FF0000; /* Couleur plus foncée au survol */
 }
 
 /* Place Details Section */

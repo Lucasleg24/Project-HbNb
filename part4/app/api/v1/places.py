@@ -55,6 +55,7 @@ class PlaceList(Resource):
             "title": i.title,
             "latitude": i.latitude,
             "longitude": i.longitude,
+            "price": i.price,
         } for i in facade.get_all_places()], 200
 
 @api.route("/<place_id>")
