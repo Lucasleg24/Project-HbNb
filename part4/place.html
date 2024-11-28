@@ -3,106 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title> <!-- Titre par défaut, sera mis à jour dynamiquement -->
+    <title>Place Details</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body id="place-page">
     <header>
-        <img src="images/logo.png" alt="Hbnb Logo" class="logo">
+        <img src="images/logo.png" alt="Application Logo" class="logo">
         <nav>
             <a href="index.html">Home</a>
-            <a href="login.html" class="login-button">Login</a>
+            <a href="login.html" class="login-button" id="login-link">Login</a>
         </nav>
     </header>
-
     <main>
-        <!-- Section des détails de la propriété -->
-        <section id="place-details" class="place-details">
-            <h1  id="title">Loading...</h1> <!-- Titre de la place -->
-            <p class="place-info">Host: </p>
-            <p class="place-info">Price per night: </p>
-            <p class="place-info">Description: </p>
-            <h3 class="place-info">Amenities</h3>
-            <ul class="place-info">
-                <!-- Les commodités seront chargées ici -->
-            </ul>
-        </section>
-
-        <!-- Section des avis -->
-        <section id="reviews">
-            <h3>Reviews</h3>
-            <!-- Afficher un message si aucun avis n'existe -->
-            <div id="no-reviews-message" style="display: none;">
-                <p>No reviews yet. Be the first to leave one!</p>
+        <section id="place-details">
+            <!-- Place details will be populated dynamically -->
+            <h1>Beautiful Beach House</h1>
+            <div class="details-card">
+                <p><strong>Host:</strong> John Doe</p>
+                <p><strong>Price per night:</strong> $150</p>
+                <p><strong>Description:</strong> A beautiful beach house with amazing views...</p>
+                <p><strong>Amenities:</strong> WiFi, Pool, Air Conditioning</p>
             </div>
+        </section>
+        <section id="reviews">
+            <!-- Reviews will be populated dynamically -->
+            <h2>Reviews</h2>
+            <div class="review-card">
+                <p><strong>Jane Smith:</strong></p>
+                <p>Great place to stay!</p>
+                <p>Rating: ★★★★☆</p>
+            </div>
+            <div class="review-card">
+                <p><strong>Robert Brown:</strong></p>
+                <p>Amazing location and very comfortable.</p>
+                <p>Rating: ★★★★★</p>
+            </div>
+        </section>
+        <!-- Add review -->
+        <section id="add-review">
+            <h2>Add a Review</h2>
+            <form id="review-form">
+                <label for="review-text">Review:</label>
+                <textarea id="review-text" name="review-text" required></textarea>
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
 
-            <!-- Exemple d'avis affichés -->
-            <article class="review-card">
-                <p class="review-user"><strong>Jane Smith</strong>:</p>
-                <p class="review-comment">Great place to stay!</p>
-                <p class="review-rating">Rating: ★★★★☆</p>
-            </article>
-            <article class="review-card">
-                <p class="review-user"><strong>Robert Brown</strong>:</p>
-                <p class="review-comment">Amazing location and very comfortable.</p>
-                <p class="review-rating">Rating: ★★★★★</p>
-            </article>
+                <button type="submit">Submit</button>
+            </form>
         </section>
     </main>
-
     <footer>
-        <p>&copy; 2024 HBnB Evolution. All rights reserved.</p>
+        <p>&copy; 2024 All Rights Reserved</p>
     </footer>
-
-    <script>
-        // Fonction pour obtenir les paramètres d'URL
-        function getQueryParams() {
-            console.log(window.location.search);
-            const params = new URLSearchParams(window.location.search);
-            
-            return {
-                name: params.get('name'),
-                price: params.get('price'),
-                host: params.get('host'),
-                description: params.get('description'),
-                amenities: params.get('amenities') ? params.get('amenities').split(',') : []
-            };
-        }
-
-        // Charger les informations dynamiques
-        function loadPlaceDetails() {
-            const place = getQueryParams();
-            if (place.name) {
-                // Mettre à jour le titre de la page avec le nom de la place
-                document.title = place.name; // CHANGEMENT : titre de l'onglet
-                let title = document.querySelector("#title");
-                title.textContent = place.name
-                // Mettre à jour les détails du lieu
-                document.querySelector('#place-details h1').textContent = place.name; // Nom de la place
-                document.querySelector('#place-details .place-info:nth-of-type(1)').textContent = `Host: ${place.host}`;
-                document.querySelector('#place-details .place-info:nth-of-type(2)').textContent = `Price per night: $${place.price}`;
-                document.querySelector('#place-details .place-info:nth-of-type(3)').textContent = `Description: ${place.description}`;
-                
-                // Mettre à jour les commodités
-                const amenitiesList = document.querySelector('#place-details ul');
-                amenitiesList.innerHTML = ''; // Supprimer les anciennes commodités
-                place.amenities.forEach(amenity => {
-                    let li = document.createElement('li');
-                    li.textContent = amenity;
-                    amenitiesList.append(li);
-                    console.log(`test ; ${li}`)
-                });
-            } else {
-                alert("No place details found!");
-            }
-        }
-
-        // Charger les détails au chargement de la page
-        document.addEventListener('DOMContentLoaded',()=>{
-            console.log("bouh");
-            loadPlaceDetails()
-            
-        });
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
