@@ -10,6 +10,12 @@ const GET_ALL_PLACES = 'http://127.0.0.1:5000/api/v1/places';
 const GET_PLACE = 'http://127.0.0.1:5000/api/v1/places'
 const POST_REVIEW = 'http://127.0.0.1:5000/api/v1/reviews';
 const GET_REVIEWS_FROM_PLACE = 'http://127.0.0.1:5000/api/v1/reviews/places/{place_id}';
+const GET_USER_BY_ID = 'http://127.0.0.1:5000/api/v1/users';
+
+const LOGIN = 'login.html';
+const INDEX = 'index.html';
+const PLACE = 'place.html';
+const ADD_REVIEW = 'add_review.html';
 
 // Fonction pour gérer les cookies
 function setAuthCookie(token) {
@@ -110,22 +116,25 @@ async function fetchPlaces() {
 }
 
 function displayPlaces(places) {
-    const placesList = document.getElementById('places-list');
-    console.log(placesList);
-    placesList.innerHTML = '';
-    places.forEach(place => {
-        const placeElement = document.createElement('div');
-        placeElement.classList.add('card', 'place-card');
-        placeElement.dataset.price = place.price;
-        placeElement.dataset.placeId = place.id;
-        placeElement.innerHTML = `
-        <h3 class="place-name">${place.title}</h3>
-        <p class="place-price">Price per night: $${place.price}</p>
-        <a href="place.html" class="button login-button">View Details</a>`;
-        placesList.appendChild(placeElement);
-        console.log(placeElement);
-    });
-    priceFilter();
+  // récupère l'id "place-list" de la balise section de index.html
+  const placesList = document.getElementById('places-list');
+  // vide le contenu existant dans la section
+  placesList.innerHTML = '';
+  // boucle dans le dictionnaire "places", crée un élément div pour chaque lieu ajoute des class CSS pour le style
+  // crée un attribut personnalisé pour le prix du lieu (pour le trier plus tard) et l'id de la place puis rempli le contenue HTML avec les infos du lieu
+  places.forEach(place => {
+    const placeElement = document.createElement('div');
+    placeElement.classList.add('card', 'place-card');
+    placeElement.dataset.price = place.price;
+    placeElement.dataset.placeId = place.id;
+    placeElement.innerHTML = `
+      <h3 class="place-name">${place.title}</h3>
+      <p class="place-price">Price per night: $${place.price}</p>
+      <a href="place.html?place_id=-${place.id}" class="button login-button">View Details</a>`;
+    // Ajoute l'élément
+    placesList.appendChild(placeElement);
+  });
+  priceFilter();
 }
 
 function priceFilter() {
@@ -152,8 +161,10 @@ function priceFilter() {
 
 async function getPlaceIdFromURL() {
     try {
+      console.log("commence la récupération des infos");
       const url = new URL(window.location.href);
       const placeId = url.searchParams.get('place_id');
+      console.log('placeId extrait:', placeId);
       const token = getCookie('token');
       const requestUrl = `${GET_PLACE}/${placeId}`;
 
@@ -165,6 +176,7 @@ async function getPlaceIdFromURL() {
           'Content-Type': 'application/json'
         }
       });
+      console.log(response);
 
       // Vérification de la réponse
       if (!response.ok) {
@@ -172,6 +184,8 @@ async function getPlaceIdFromURL() {
       }
 
       const data = await response.json();
+      console.log("data contenair");
+      console.log(data);
       return data;
 
     } catch (error) {
@@ -185,7 +199,8 @@ async function getPlaceIdFromURL() {
         console.log("début du test place")
       displayAddReview();
       const placeData = await getPlaceIdFromURL();
-      console.log(placeData)
+      console.log("vérification place data:");
+      console.log(placeData);
       displayPlaceInfos(placeData);
     } catch (error) {
       console.error('Erreur lors du chargement:', error);
@@ -193,6 +208,8 @@ async function getPlaceIdFromURL() {
   }
 
   async function displayPlaceInfos(data) {
+    console.log(data);
+    console.log(data.price);
     const placeBucket = document.getElementById('place-details'); // Cible la section existante
     placeBucket.innerHTML = ''; // Vide le contenu actuel pour le remplacer
 
@@ -204,6 +221,7 @@ async function getPlaceIdFromURL() {
     // Création de la carte de détails
     const placeElement = document.createElement('div');
     placeElement.classList.add('details-card');
+    console.log(placeElement.classList)
 
     // Ajout des informations dynamiques
     placeElement.innerHTML = `
@@ -219,6 +237,7 @@ async function getPlaceIdFromURL() {
 
   function displayAddReview() {
     const token = getCookie('token');
+    console.log("test displayAddreview");
     const addReviewSection = document.getElementById('add-review');
     if (!token) {
       addReviewSection.style.display = 'none';
@@ -283,6 +302,33 @@ async function getPlaceIdFromURL() {
       reviewsList.appendChild(reviewCard);
     }
   }
+
+// Fonction pour récupérer un utilisateur
+async function getUser(id) {
+  const requestUrl = `${GET_USER_BY_ID}/${id}`;
+  const token = getCookie('token');
+  console.log(id);
+  console.log(requestUrl);
+  try {
+    const response = await fetch(requestUrl, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+    }
+    const data = await response.json();
+    const user = `${data.first_name} ${data.last_name}`;
+    return user;
+
+  } catch (error) {
+    console.error('Erreur lors de la récupération de l\’utilisateur :', error);
+    return null;
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     checkAuthentication();
