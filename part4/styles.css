@@ -128,22 +128,6 @@ footer {
     background-color: #FF0000; /* Couleur plus foncée au survol */
 }
 
-/* Place Details Section */
-.place-details {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.place-info {
-    margin-bottom: 10px;
-    font-size: 16px;
-    line-height: 1.5;
-}
 
 /* Reviews Section */
 #reviews {
@@ -302,4 +286,48 @@ footer {
         width: 100%;                       /* La section de login prend 100% de la largeur sur petits écrans */
         padding: 15px;
     }
+}
+
+/* Détails du lieu (page place.html) */
+.place-details {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.details-card {
+    text-align: center;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.details-card h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #008cff;
+}
+
+.details-card p {
+    font-size: 1rem;
+}
+
+ul.details-card {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+ul.details-card li {
+    margin-bottom: 0.5rem;
+}
+
+h1 {
+    text-align: center;
 }

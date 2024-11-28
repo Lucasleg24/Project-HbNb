@@ -130,7 +130,7 @@ function displayPlaces(places) {
     placeElement.innerHTML = `
       <h3 class="place-name">${place.title}</h3>
       <p class="place-price">Price per night: $${place.price}</p>
-      <a href="place.html?place_id=-${place.id}" class="button login-button">View Details</a>`;
+      <a href="place.html?place_id=${place.id}" class="button login-button">View Details</a>`;
     // Ajoute l'élément
     placesList.appendChild(placeElement);
   });
@@ -164,6 +164,7 @@ async function getPlaceIdFromURL() {
       console.log("commence la récupération des infos");
       const url = new URL(window.location.href);
       const placeId = url.searchParams.get('place_id');
+      console.log(placeId);
       console.log('placeId extrait:', placeId);
       const token = getCookie('token');
       const requestUrl = `${GET_PLACE}/${placeId}`;
@@ -225,7 +226,7 @@ async function getPlaceIdFromURL() {
 
     // Ajout des informations dynamiques
     placeElement.innerHTML = `
-      <p><strong>Host:</strong> ${await getUser(data.owner_id) || 'Unknown Host'}</p>
+      <p><strong>Host:</strong> ${await getUser(data.owner) || 'Unknown Host'}</p>
       <p><strong>Price per night:</strong> $${data.price || 'N/A'}</p>
       <p><strong>Description:</strong> ${data.description || 'No description available.'}</p>
       <p><strong>Amenities:</strong> ${data.amenities ? data.amenities.map(amenity => amenity.name).join(', ') : 'No amenities listed.'}</p>
@@ -305,7 +306,7 @@ async function getPlaceIdFromURL() {
 
 // Fonction pour récupérer un utilisateur
 async function getUser(id) {
-  const requestUrl = `${GET_USER_BY_ID}/${id}`;
+  const requestUrl = `${GET_USER_BY_ID}/${id.id}`;
   const token = getCookie('token');
   console.log(id);
   console.log(requestUrl);
